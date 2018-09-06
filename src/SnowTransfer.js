@@ -50,9 +50,9 @@ class SnowTransfer {
             this.raven = Raven;
         }
         this.ratelimiter = new Ratelimiter();
-        this.requestHandler = new RequestHandler(this.ratelimiter, {
+        this.requestHandler = new RequestHandler({
             token: this.token,
-            raven: this.raven,
+            // raven: this.raven,
             baseHost: this.options.baseHost || Endpoints.BASE_HOST
         });
         this.channel = new ChannelMethods(this.requestHandler);
