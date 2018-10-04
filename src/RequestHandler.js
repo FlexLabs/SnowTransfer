@@ -62,7 +62,10 @@ class RequestHandler {
     * @arg {String} file.name What to name the file
     * @returns {Promise<Object>} Resolves with the returned JSON data
     */
-    request(method, url, auth, body, file, _route, short) {
+    request(url, method, dataType, body, file, _route, short) {
+    // request(method, url, auth, body, file, _route, short) {
+        let auth = true;
+        method = method.toUpperCase();
         var route = _route || this.routefy(url, method);
 
         var _stackHolder = {}; // Preserve async stack
@@ -248,19 +251,19 @@ class RequestHandler {
                                 if(resp.headers["retry-after"]) {
                                     setTimeout(() => {
                                         cb();
-                                        this.request(method, url, auth, body, file, route, true).then(resolve).catch(reject);
+                                        this.request(url, method, auth, body, file, route, true).then(resolve).catch(reject);
                                     }, +resp.headers["retry-after"]);
                                     return;
                                 } else {
                                     cb();
-                                    this.request(method, url, auth, body, file, route, true).then(resolve).catch(reject);
+                                    this.request(url, method, auth, body, file, route, true).then(resolve).catch(reject);
                                     return;
                                 }
                             } else if(resp.statusCode === 502 && ++attempts < 4) {
 								console.log("A wild 502 appeared! Thanks CloudFlare!");
                                 // this._client.emit("debug", "A wild 502 appeared! Thanks CloudFlare!");
                                 setTimeout(() => {
-                                    this.request(method, url, auth, body, file, route, true).then(resolve).catch(reject);
+                                    this.request(url, method, auth, body, file, route, true).then(resolve).catch(reject);
                                 }, Math.floor(Math.random() * 1900 + 100));
                                 return cb();
                             }
