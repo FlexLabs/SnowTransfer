@@ -10,7 +10,7 @@
 const Constants = require('./Constants');
 
 module.exports.BASE_URL = '/api/v' + Constants.REST_API_VERSION;
-module.exports.BASE_HOST = 'https://discordapp.com';
+module.exports.BASE_HOST = 'discordapp.com';
 module.exports.CDN_URL = 'https://cdn.discordapp.com';
 
 module.exports.CHANNEL = (chanID) => `/channels/${chanID}`;

@@ -6,7 +6,8 @@ const Endpoints = require("./Endpoints");
 const HTTPS = require("https");
 const MultipartData = require("./util/MultipartData");
 const SequentialBucket = require("./util/SequentialBucket");
-const version = require("../../package.json").version;
+// const version = require("../../package.json").version;
+const version = "1.0.2";
 const Zlib = require("zlib");
 
 /**
